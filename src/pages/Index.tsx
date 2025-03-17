@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Bill } from '@/types';
 import { useBills } from '@/hooks/useBills';
@@ -8,7 +7,7 @@ import { BillList } from '@/components/BillList';
 import { BillDetails } from '@/components/BillDetails';
 import { SettlementSummary } from '@/components/SettlementSummary';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { SplitHorizontal, Receipt, Users, Calculator } from 'lucide-react';
+import { DollarSign, Receipt, Users, Calculator } from 'lucide-react';
 
 const Index = () => {
   const { 
@@ -30,7 +29,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex items-center gap-2 mb-2">
-            <SplitHorizontal className="h-8 w-8" />
+            <DollarSign className="h-8 w-8" />
             <h1 className="text-4xl font-bold tracking-tight">SplitWise</h1>
           </div>
           <p className="text-primary-foreground/90 text-lg max-w-md">
@@ -120,7 +119,7 @@ const Index = () => {
       <footer className="border-t bg-muted/50 py-6 mt-12">
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <SplitHorizontal className="h-5 w-5 text-primary" />
+            <DollarSign className="h-5 w-5 text-primary" />
             <span className="font-medium">SplitWise</span>
           </div>
           <p className="text-muted-foreground text-sm">
