@@ -21,6 +21,17 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const pointerRef = useRef<HTMLDivElement>(null);
   const billRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Reset animation when window resizes
+  useEffect(() => {
+    const handleResize = () => {
+      setIsAnimating(false);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Animation timeline
   useEffect(() => {
@@ -34,20 +45,21 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
   }, [isAnimating]);
 
   const animatePointer = async () => {
-    if (!cardRef.current || !pointerRef.current) return;
+    if (!containerRef.current || !cardRef.current) return;
     
-    const cardRect = cardRef.current.getBoundingClientRect();
+    // Get container position for relative positioning
+    const containerRect = containerRef.current.getBoundingClientRect();
     
-    // Start position (outside the card)
+    // Start position (left of the card)
     setMousePosition({ 
-      x: cardRect.left - 50, 
-      y: cardRect.top + cardRect.height / 2 
+      x: 20, 
+      y: containerRect.height / 2 
     });
     
     // Animate to card title
     await animateTo(
-      cardRect.left + 100,
-      cardRect.top + 40,
+      100,
+      40,
       1000
     );
     
@@ -56,10 +68,13 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
       if (!billRefs.current[i]) continue;
       
       const billRect = billRefs.current[i]!.getBoundingClientRect();
-      const centerX = billRect.left + billRect.width / 2;
-      const centerY = billRect.top + billRect.height / 2;
+      const containerRect = containerRef.current.getBoundingClientRect();
       
-      await animateTo(centerX, centerY, 800);
+      // Calculate position relative to container
+      const relativeX = billRect.left - containerRect.left + (billRect.width / 2);
+      const relativeY = billRect.top - containerRect.top + (billRect.height / 2);
+      
+      await animateTo(relativeX, relativeY, 800);
       setActiveIndex(i);
       await new Promise(resolve => setTimeout(resolve, 1000));
       setActiveIndex(null);
@@ -67,8 +82,8 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
     
     // Move out of the card
     await animateTo(
-      cardRect.right + 50,
-      cardRect.bottom + 50,
+      containerRect.width - 20,
+      containerRect.height - 20,
       1000
     );
     
@@ -110,7 +125,7 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
   };
 
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative">
       <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-primary/40 rounded-xl blur"></div>
       <Card 
         ref={cardRef} 
