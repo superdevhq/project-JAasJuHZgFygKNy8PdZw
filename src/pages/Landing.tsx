@@ -320,7 +320,7 @@ const Landing = () => {
                   </Button>
                 </div>
                 
-                <div className="flex items-center gap-6 pt-2">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
                   <div className="flex items-center gap-2">
                     <Check className="h-5 w-5 text-primary" />
                     <span className="text-sm font-medium">Free to use</span>
