@@ -18,6 +18,8 @@ export interface Bill {
   participants: string[]; // Participant IDs
   splits: Split[];
   totalAmount: number;
+  category?: string; // Optional category field
+  tags?: string[]; // Optional tags array
 }
 
 export interface Split {
@@ -30,3 +32,17 @@ export interface Settlement {
   to: string; // Participant ID
   amount: number;
 }
+
+// Predefined categories for bills
+export const BILL_CATEGORIES = [
+  'Food & Dining',
+  'Groceries',
+  'Transportation',
+  'Utilities',
+  'Entertainment',
+  'Housing',
+  'Travel',
+  'Shopping',
+  'Health',
+  'Other'
+];

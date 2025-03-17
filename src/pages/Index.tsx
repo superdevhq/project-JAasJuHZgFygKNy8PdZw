@@ -1,11 +1,12 @@
+
 import { useState } from 'react';
 import { Bill } from '@/types';
 import { useBills } from '@/hooks/useBills';
 import { ParticipantList } from '@/components/ParticipantList';
 import { BillForm } from '@/components/BillForm';
-import { BillList } from '@/components/BillList';
 import { BillDetails } from '@/components/BillDetails';
 import { SettlementSummary } from '@/components/SettlementSummary';
+import { BillListWithSearch } from '@/components/BillListWithSearch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DollarSign, Receipt, Users, Calculator } from 'lucide-react';
 
@@ -94,7 +95,7 @@ const Index = () => {
                     />
                   </div>
                 ) : (
-                  <BillList 
+                  <BillListWithSearch 
                     bills={bills}
                     participants={participants}
                     onRemoveBill={removeBill}
