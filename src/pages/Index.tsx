@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Bill } from '@/types';
 import { useBills } from '@/hooks/useBills';
 import { ParticipantList } from '@/components/ParticipantList';
@@ -7,8 +8,9 @@ import { BillDetails } from '@/components/BillDetails';
 import { SettlementSummary } from '@/components/SettlementSummary';
 import { BillListWithSearch } from '@/components/BillListWithSearch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { DollarSign, Receipt, Users, Calculator } from 'lucide-react';
+import { DollarSign, Receipt, Users, Calculator, Home } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const Index = () => {
   const { 
@@ -28,9 +30,17 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b bg-background py-6 shadow-sm">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 mb-2">
-            <DollarSign className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold">SplitWise</h1>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <DollarSign className="h-8 w-8 text-primary" />
+              <h1 className="text-3xl font-bold">SplitWise</h1>
+            </div>
+            <Link to="/">
+              <Button variant="ghost" size="sm" className="gap-2">
+                <Home className="h-4 w-4" />
+                <span>Back to Landing</span>
+              </Button>
+            </Link>
           </div>
           <p className="text-muted-foreground text-lg max-w-md">
             Split bills easily with friends and keep track of who owes what
