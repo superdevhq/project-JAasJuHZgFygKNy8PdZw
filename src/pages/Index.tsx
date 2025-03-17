@@ -25,18 +25,16 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="relative overflow-hidden bg-gradient-to-r from-primary to-purple-600 text-primary-foreground py-12">
-        <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
-        <div className="container mx-auto px-4 relative z-10">
+      <header className="border-b bg-background py-6">
+        <div className="container mx-auto px-4">
           <div className="flex items-center gap-2 mb-2">
-            <DollarSign className="h-8 w-8" />
-            <h1 className="text-4xl font-bold tracking-tight">SplitWise</h1>
+            <DollarSign className="h-8 w-8 text-primary" />
+            <h1 className="text-3xl font-bold">SplitWise</h1>
           </div>
-          <p className="text-primary-foreground/90 text-lg max-w-md">
+          <p className="text-muted-foreground text-lg max-w-md">
             Split bills easily with friends and keep track of who owes what
           </p>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background to-transparent"></div>
       </header>
       
       <main className="container mx-auto px-4 py-8 flex-grow">
