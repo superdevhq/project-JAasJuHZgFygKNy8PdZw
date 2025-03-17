@@ -56,10 +56,7 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
       y: containerRect.height / 2 
     });
     
-    // Wait a moment at the center
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Animate to each bill item
+    // Visit each bill item in sequence
     for (let i = 0; i < bills.length; i++) {
       if (!billRefs.current[i]) continue;
       
@@ -70,22 +67,15 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
       const relativeX = billRect.left - containerRect.left + (billRect.width / 2);
       const relativeY = billRect.top - containerRect.top + (billRect.height / 2);
       
-      // Slower animation (1500ms instead of 800ms)
+      // Move to this bill item
       await animateTo(relativeX, relativeY, 1500);
       setActiveIndex(i);
       await new Promise(resolve => setTimeout(resolve, 1500));
       setActiveIndex(null);
     }
     
-    // Return to the middle
-    await animateTo(
-      containerRect.width / 2,
-      containerRect.height / 2,
-      1500
-    );
-    
-    // Wait a moment before restarting
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Wait a moment before restarting the whole animation
+    await new Promise(resolve => setTimeout(resolve, 2000));
     
     // Reset and repeat
     setIsAnimating(false);
