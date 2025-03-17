@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Bill, BILL_CATEGORIES } from '@/types';
 import { Input } from '@/components/ui/input';
@@ -93,14 +92,14 @@ export function BillSearch({ bills, onFilteredBillsChange }: BillSearchProps) {
         <div className="w-full sm:w-48 space-y-2">
           <Label htmlFor="category">Category</Label>
           <Select 
-            value={selectedCategory || ''} 
-            onValueChange={(value) => setSelectedCategory(value || null)}
+            value={selectedCategory || 'all'} 
+            onValueChange={(value) => setSelectedCategory(value === 'all' ? null : value)}
           >
             <SelectTrigger id="category">
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {BILL_CATEGORIES.map(category => (
                 <SelectItem key={category} value={category}>
                   {category}
