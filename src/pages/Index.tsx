@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Bill } from '@/types';
 import { useBills } from '@/hooks/useBills';
@@ -70,22 +69,28 @@ const Index = () => {
           </div>
           
           <div className="lg:col-span-2 animate-in" style={{ animationDelay: "200ms" }}>
+            <div className="flex items-center gap-2 mb-6">
+              <Receipt className="h-5 w-5 text-primary" />
+              <h2 className="text-2xl font-semibold">Manage Bills</h2>
+            </div>
+            
             <Tabs defaultValue="bills" className="w-full">
-              <div className="flex items-center gap-2 mb-6">
-                <Receipt className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-semibold">Manage Bills</h2>
-              </div>
-              
-              <TabsList className="grid w-full grid-cols-2 mb-8">
-                <TabsTrigger value="bills" className="text-base py-3">
+              <TabsList className="w-full mb-6 h-12 bg-muted/50 p-1 rounded-lg">
+                <TabsTrigger 
+                  value="bills" 
+                  className="flex-1 h-10 rounded-md data-[state=active]:bg-background data-[state=active]:shadow"
+                >
                   View Bills
                 </TabsTrigger>
-                <TabsTrigger value="add" className="text-base py-3">
+                <TabsTrigger 
+                  value="add" 
+                  className="flex-1 h-10 rounded-md data-[state=active]:bg-background data-[state=active]:shadow"
+                >
                   Add New Bill
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="bills" className="mt-0">
+              <TabsContent value="bills" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
                 {selectedBill ? (
                   <div className="animate-in">
                     <BillDetails 
@@ -104,7 +109,7 @@ const Index = () => {
                 )}
               </TabsContent>
               
-              <TabsContent value="add" className="mt-0">
+              <TabsContent value="add" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
                 <BillForm 
                   participants={participants}
                   onAddBill={addBill}
