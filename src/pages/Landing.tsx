@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { DollarSign, Users, Calculator, Receipt, ArrowRight, Check, Sparkles, Clock, Shield } from 'lucide-react';
+import { DollarSign, Users, Calculator, Receipt, ArrowRight, Check, Sparkles, Clock, Shield, Wallet, CreditCard, Zap } from 'lucide-react';
 import AnimatedBillsCard from '@/components/AnimatedBillsCard';
 
 const Landing = () => {
@@ -286,23 +286,87 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary/5">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to simplify expense sharing?</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-            Join thousands of users who have made splitting bills stress-free
-          </p>
-          <Link to="/app">
-            <Button size="lg" className="gap-2">
-              Get Started Now <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
+      {/* Enhanced CTA Section */}
+      <section className="py-24 relative overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary/5"></div>
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto bg-background/80 backdrop-blur-sm rounded-2xl shadow-xl border border-primary/20 p-8 md:p-12">
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              <div className="flex-1 space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm">
+                  <Zap className="h-4 w-4" /> Limited Time Offer
+                </div>
+                
+                <h2 className="text-3xl md:text-4xl font-bold">
+                  Ready to simplify your <span className="text-primary">expense sharing?</span>
+                </h2>
+                
+                <p className="text-lg text-muted-foreground">
+                  Join thousands of users who have made splitting bills stress-free
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link to="/app" className="w-full sm:w-auto">
+                    <Button size="lg" className="w-full gap-2 shadow-lg">
+                      Get Started Now <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2">
+                    See Demo
+                  </Button>
+                </div>
+                
+                <div className="flex items-center gap-6 pt-2">
+                  <div className="flex items-center gap-2">
+                    <Check className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium">Free to use</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium">No credit card</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium">Cancel anytime</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="hidden md:block">
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/40 rounded-full blur"></div>
+                  <div className="relative bg-primary/10 rounded-full p-6">
+                    <div className="w-32 h-32 flex items-center justify-center">
+                      <Wallet className="h-16 w-16 text-primary" />
+                    </div>
+                  </div>
+                  <div className="absolute -bottom-4 -right-4 bg-background rounded-full p-2 shadow-lg border border-border">
+                    <CreditCard className="h-6 w-6" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <p className="text-sm text-muted-foreground">
+              Trusted by over <span className="font-semibold">10,000+</span> users worldwide
+            </p>
+            <div className="flex justify-center gap-8 mt-4">
+              {['Acme Inc.', 'Globex', 'Stark Industries', 'Wayne Enterprises'].map((company, index) => (
+                <span key={index} className="text-sm font-semibold opacity-70">{company}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-muted/50 py-12">
+      <section className="border-t bg-muted/50 py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
@@ -357,7 +421,7 @@ const Landing = () => {
             </div>
           </div>
         </div>
-      </footer>
+      </section>
     </div>
   );
 };
