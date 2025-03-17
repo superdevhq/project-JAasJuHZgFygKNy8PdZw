@@ -1,13 +1,20 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DollarSign, Users, Calculator, Receipt, ArrowRight, Check, Sparkles, Clock, Shield } from 'lucide-react';
+import AnimatedBillsCard from '@/components/AnimatedBillsCard';
 
 const Landing = () => {
   const [activeTab, setActiveTab] = useState('features');
+  
+  // Sample bills data
+  const recentBills = [
+    { title: 'Dinner at Olive Garden', amount: 89.50, date: 'Yesterday', participants: 4 },
+    { title: 'Groceries', amount: 124.35, date: 'May 15', participants: 3 },
+    { title: 'Movie Night', amount: 48.00, date: 'May 10', participants: 5 }
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -54,33 +61,7 @@ const Landing = () => {
             </div>
             
             <div className="relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-primary/40 rounded-xl blur"></div>
-              <Card className="relative border border-border/40 shadow-xl bg-background/95 backdrop-blur">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Receipt className="h-5 w-5 text-primary" />
-                    <h3 className="text-xl font-semibold">Recent Bills</h3>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    {[
-                      { title: 'Dinner at Olive Garden', amount: 89.50, date: 'Yesterday', participants: 4 },
-                      { title: 'Groceries', amount: 124.35, date: 'May 15', participants: 3 },
-                      { title: 'Movie Night', amount: 48.00, date: 'May 10', participants: 5 }
-                    ].map((bill, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/50 hover:bg-muted/80 transition-colors">
-                        <div>
-                          <h4 className="font-medium">{bill.title}</h4>
-                          <p className="text-sm text-muted-foreground flex items-center gap-1">
-                            <Users className="h-3 w-3" /> {bill.participants} people • {bill.date}
-                          </p>
-                        </div>
-                        <p className="text-lg font-semibold">${bill.amount.toFixed(2)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <AnimatedBillsCard bills={recentBills} />
             </div>
           </div>
         </div>
