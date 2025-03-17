@@ -39,7 +39,7 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
       const timer = setTimeout(() => {
         setIsAnimating(true);
         animatePointer();
-      }, 1000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [isAnimating]);
@@ -50,18 +50,14 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
     // Get container position for relative positioning
     const containerRect = containerRef.current.getBoundingClientRect();
     
-    // Start position (left of the card)
+    // Start position (middle of the card)
     setMousePosition({ 
-      x: 20, 
+      x: containerRect.width / 2, 
       y: containerRect.height / 2 
     });
     
-    // Animate to card title
-    await animateTo(
-      100,
-      40,
-      1000
-    );
+    // Wait a moment at the center
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
     // Animate to each bill item
     for (let i = 0; i < bills.length; i++) {
@@ -74,18 +70,22 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
       const relativeX = billRect.left - containerRect.left + (billRect.width / 2);
       const relativeY = billRect.top - containerRect.top + (billRect.height / 2);
       
-      await animateTo(relativeX, relativeY, 800);
+      // Slower animation (1500ms instead of 800ms)
+      await animateTo(relativeX, relativeY, 1500);
       setActiveIndex(i);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setActiveIndex(null);
     }
     
-    // Move out of the card
+    // Return to the middle
     await animateTo(
-      containerRect.width - 20,
-      containerRect.height - 20,
-      1000
+      containerRect.width / 2,
+      containerRect.height / 2,
+      1500
     );
+    
+    // Wait a moment before restarting
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
     // Reset and repeat
     setIsAnimating(false);
@@ -144,7 +144,7 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
                 ref={el => billRefs.current[index] = el}
                 className={`
                   flex items-center justify-between p-3 rounded-lg 
-                  transition-all duration-300 ease-in-out
+                  transition-all duration-500 ease-in-out
                   ${activeIndex === index 
                     ? 'bg-primary/20 scale-105 shadow-md' 
                     : 'bg-muted/50 hover:bg-muted/80'}
@@ -171,7 +171,7 @@ const AnimatedBillsCard = ({ bills }: AnimatedBillsCardProps) => {
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
           transform: 'translate(-50%, -50%)',
-          transition: 'opacity 0.3s ease-in-out',
+          transition: 'opacity 0.5s ease-in-out',
           opacity: isAnimating ? 1 : 0
         }}
       >
